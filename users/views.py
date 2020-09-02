@@ -1,13 +1,14 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from users.models import User
-from rest_framework.views import APIView
-from rest_framework.decorators import action
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import CreateAPIView
+from rest_framework.decorators import action, APIView
+from rest_framework.viewsets import ModelViewSet, ViewSet
 from .serializers import (
     UserListSerializer,
     UserDetailSerializer,
     UserCreateUpdateSerializer,
+    UserRegisterSerializer,
     GroupListSerializer,
     GroupCreateUpdateSerializer,
     PermissionSerializer
@@ -44,3 +45,6 @@ class GroupViewSet(ModelViewSet):
 class PermissionViewSet(ModelViewSet):
     queryset = Permission.objects.all()
     serializer_class = PermissionSerializer
+
+class Register(CreateAPIView):
+    serializer_class = UserRegisterSerializer

@@ -38,6 +38,15 @@ class UserCreateUpdateSerializer(ModelSerializer):
             'groups'
         ]
 
+class UserRegisterSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'email',
+            'name',
+            'password'
+        ]
+
 class PermissionSerializer(ModelSerializer):
     class Meta:
         model = Permission

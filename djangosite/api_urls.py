@@ -10,7 +10,7 @@ from blogs.views import BlogViewSet
 from courses.views import CourseViewSet, PaymentViewSet, VideoViewSet
 from categories.views import CategoryViewSet
 from comments.views import CommentViewSet
-from users.views import GroupViewSet, PermissionViewSet, UserViewSet
+from users.views import GroupViewSet, PermissionViewSet, UserViewSet, Register as RegisterUser
 
 
 router = routers.DefaultRouter()
@@ -26,6 +26,7 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('login', TokenObtainPairView.as_view()),
+    path('register', RegisterUser.as_view()),
     path('token/refresh', TokenRefreshView.as_view()),
     path('', include(router.urls)),
 ]
