@@ -27,7 +27,6 @@ django-jalali==4.0.0
 django-polymorphic==2.1.2
 django-resized==0.3.11
 django-rest-auth==0.9.5
-django-socket-server==0.0.4
 djangorestframework==3.11.0
 djangorestframework-simplejwt==4.4.0
 docutils==0.16
