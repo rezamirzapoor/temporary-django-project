@@ -27,7 +27,9 @@ SECRET_KEY = 'd30$7n5_@zgvq2qf$+_o#8&d!2vjnn%-_c_%7_jyh6w&*m^ky7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 AUTH_USER_MODEL = 'users.User'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'django-restfull.herokuapp.com'
+]
 
 
 # Application definition
