@@ -1,0 +1,70 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<div class="container-fluid">
+    <div class="row">
+        {% for blog in blogs %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2">
+            <div class="bg-warning p-3 shadow rounded">
+                <img src="{{blog.thumbnail}}" alt="{{blog.title}}" width="100%" height="250px" />
+                <a class="link-secondary text-decoration-none text-center" href="{% url 'blogs:details' blog.id %}"><h5 class="mt-2">{{blog.title}}</h5></a>
+                <p>{{blog.brief_content}}</p>
+                <div class="row">
+                    <div class="col-sm-4 col-6">
+                        <p>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="ml-1 text-info bi bi-calendar" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
+                                <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
+                              </svg>
+                            {{blog.published_at}}
+                        </p>
+                    </div>
+                    <div class="col-sm-4 col-6">
+                            <p>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="ml-1 bi bi-chat-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+                                </svg>
+                                {{blog.comment_set.count}}
+                            </p>        
+                    </div>
+                    <div class="col-sm-4 col-6">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="ml-1 text-danger bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                              {{blog.user_set.count}}
+                    </div>
+                    <div class="col-sm-4 col-6">
+                            <p>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="ml-1 bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                                  </svg>
+                                {{blog.publisher.name}}
+                            </p>
+                    </div>
+                    <div class="col-12 col-sm-8">
+                            <p>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="ml-1 bi bi-alarm-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H9v1.07a7.002 7.002 0 0 1 3.537 12.26l.817.816a.5.5 0 0 1-.708.708l-.924-.925A6.967 6.967 0 0 1 8 16a6.967 6.967 0 0 1-3.722-1.07l-.924.924a.5.5 0 0 1-.708-.708l.817-.816A7.002 7.002 0 0 1 7 2.07V1H5.999a.5.5 0 0 1-.5-.5zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1zm-5 4a.5.5 0 0 0-1 0v3.882l-1.447 2.894a.5.5 0 1 0 .894.448l1.5-3A.5.5 0 0 0 8.5 9V5z"/>
+                                  </svg>
+                                زمان مطالعه تقریبا {{blog.time_for_read}} دقیقه
+                            </p>
+                    </div>
+                    <div class="col-12">
+                            <p>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="ml-1 bi bi-tags-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M3 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 7.586 1H3zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
+                                  </svg>
+                                دسته بندی: {% for category in blog.categories.all %}
+                                {{category.title}},
+                            {% endfor %}
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
