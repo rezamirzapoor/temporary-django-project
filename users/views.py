@@ -17,6 +17,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import ListCreateAPIView
 from django.contrib.auth.models import Group, Permission
+from rest_framework_simplejwt import authentication
 # Create your views here.
 
 
@@ -31,7 +32,9 @@ class UserViewSet(ModelViewSet):
 
     @action(methods=['get'], detail=False, url_path='profile', permission_classes=[IsAuthenticated])
     def profile(self, request):
-        serializer = UserDetailSerializer(request.user.getUser())
+        email = authentication.JWTAuthentication().authenticate(request)[0]
+        user = User.objects.filter(email=email).first()
+        serializer = UserDetailSerializer(user)
         return Response(serializer.data)
 
 class GroupViewSet(ModelViewSet):

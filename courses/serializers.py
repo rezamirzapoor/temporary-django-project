@@ -37,6 +37,8 @@ class CourseListSerializer(ModelSerializer):
     
     owner = SerializerMethodField()
     thumbnail = SerializerMethodField()
+    comments_count = SerializerMethodField()
+    categories = SerializerMethodField()
     # url = serializers.HyperlinkedIdentityField(view_name='courses:detail') # we can add loockup_field
     detail_url = HyperlinkedIdentityField(view_name='course-detail') # we can add loockup_field
     class Meta:
@@ -52,6 +54,8 @@ class CourseListSerializer(ModelSerializer):
             'price',
             'off',
             'episodes_count',
+            'comments_count',
+            'categories',
             'detail_url',
         ]
 
@@ -62,7 +66,12 @@ class CourseListSerializer(ModelSerializer):
             "email": obj.owner.email,
         }
     def get_thumbnail(self, obj):
-        return obj.thumbnail.url if obj.thumbnail else 'http://localhost:8000/media/images/1.jpg'
+        return self.context['request'].build_absolute_uri(obj.thumbnail.url) if obj.thumbnail else 'http://localhost:8000/media/images/1.jpeg'
+    def get_comments_count(self, obj):
+        return obj.comments.count()
+    def get_categories(self, obj):
+        return [c.title for c in obj.categories.all()]
+    
 
 class CourseCreateUpdateSerializer(ModelSerializer):
     class Meta:
