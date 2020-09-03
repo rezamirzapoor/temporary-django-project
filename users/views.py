@@ -51,3 +51,5 @@ class PermissionViewSet(ModelViewSet):
 
 class Register(CreateAPIView):
     serializer_class = UserRegisterSerializer
+    def perform_create(self, serializer):
+        serializer.save(is_active=True, is_staff=False)

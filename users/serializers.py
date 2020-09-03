@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField
 from .models import User
 from django.contrib.auth.models import Group, Permission
-
+from django.contrib.auth.hashers import make_password
 
 class UserListSerializer(ModelSerializer):
     detail_url = HyperlinkedIdentityField(view_name="user-detail")
@@ -46,7 +46,10 @@ class UserRegisterSerializer(ModelSerializer):
             'name',
             'password'
         ]
-
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data['password'])
+        return super().create(validated_data)
+    
 class PermissionSerializer(ModelSerializer):
     class Meta:
         model = Permission

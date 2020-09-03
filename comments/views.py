@@ -13,3 +13,7 @@ class CommentViewSet(ModelViewSet):
         return CommentListSerializer if self.action == 'list' else CommentCreateSerializer 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user.getUser())
+    def get_serializer_context(self):
+        data = {}
+        data['request'] = self.request
+        return data

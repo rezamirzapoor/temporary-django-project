@@ -31,6 +31,7 @@ class CommentListSerializer(ModelSerializer):
         return {
             'name': comment.user.name,
             'email': comment.user.email,
+            'avatar': comment.user.avatar.url,
         }
     def get_replies(self, obj):
         if(obj.is_parent()):
